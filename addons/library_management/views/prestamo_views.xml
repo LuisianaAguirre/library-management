@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_prestamo_list" model="ir.ui.view">
+        <field name="name">library_management.prestamo.list</field>
+        <field name="model">library_management.prestamo</field>
+        <field name="arch" type="xml">
+            <list decoration-danger="estado_display=='Activo'" decoration-success="estado_display=='Devuelto'">
+                <field name="socio_id"/>
+                <field name="libro_id"/>
+                <field name="fecha_prestamo"/>
+                <field name="estado_display"/>
+                <field name="is_returned" string="Marcar Devolución" widget="boolean_toggle"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_prestamo_form" model="ir.ui.view">
+        <field name="name">library_management.prestamo.form</field>
+        <field name="model">library_management.prestamo</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="socio_id"/>
+                        <field name="libro_id"/>
+                        <field name="fecha_prestamo"/>
+                        <field name="estado_display" readonly="1"/>
+                        <field name="is_returned" widget="boolean_toggle"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_prestamo" model="ir.actions.act_window">
+        <field name="name">Préstamos</field>
+        <field name="res_model">library_management.prestamo</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <menuitem id="menu_prestamo" name="Préstamos" parent="menu_library_root" action="action_prestamo" sequence="30"/>
+</odoo>
